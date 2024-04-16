@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'kenyaLink',
+    'django_recaptcha',
 ]
 
 MIDDLEWARE = [
@@ -37,6 +38,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'klf.urls'
@@ -105,9 +107,34 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'static'),
+    ]
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'static')
+MEDIA_URL='/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "KLF website"
+EMAIL_HOST_USER = 'roykatiwa@gmail.com'
+EMAIL_HOST_PASSWORD = 'ojvz uuql dxnd iuxw'
+#ALLOWED_HOSTS =['hindsight-ventures.onrender.com','hindsight-ventures.com','127.0.0.1']
+
+
+#recaptcha
+RECAPTCHA_PUBLIC_KEY = '6LcpC70pAAAAAAsdl1CJBYmzchhS2C4emReWe1Cj'
+RECAPTCHA_PRIVATE_KEY = '6LcpC70pAAAAADMfqtUYpI2KxlBhl0aLlqz9duBs'

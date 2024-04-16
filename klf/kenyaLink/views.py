@@ -1,4 +1,52 @@
-from django.shortcuts import render
+
+from django.shortcuts import render, redirect
+from .forms import ContactForm
+from .models import ContactSubmission
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
+from django.utils import timezone
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            # Save the submission in the database
+            submission = form.save(commit=False)
+            submission.save()
+
+            # Send the email
+            send_contact_email(submission)
+
+            return render(request, 'base/contact.html')  # Render success page
+    else:
+        form = ContactForm()
+
+    return render(request, 'base/contact.html', {'form': form})
+
+def send_contact_email(submission):
+    # Render the email content using the provided HTML template
+    email_content = render_to_string('email_template.html', {
+        'first_name': submission.first_name,
+        'last_name': submission.last_name,
+        'email': submission.email,
+        'subject': submission.subject,
+        'message': submission.message,
+        'sent_at': timezone.now().strftime('%d-%m-%Y %H:%M:%S')  # Format the time as needed
+    })
+
+    # Create an EmailMultiAlternatives object to support HTML content
+    email = EmailMultiAlternatives(
+        subject='New Contact Form Submission',
+        body='This is a plain text email, please enable HTML to view the message.',  # Plain text alternative
+        from_email='mbakaz44@gmail.com',  # Update with your email
+        to=['roykatiwa@gmail.com'],  # Update with recipient email
+    )
+
+    # Attach the HTML content
+    email.attach_alternative(email_content, "text/html")
+
+    # Send the email
+    email.send()
 
 # Create your views here.
 
@@ -6,14 +54,19 @@ from django.shortcuts import render
 def home(request):
     return render(request, 'base/home.html')
 
-def contact(request):
-    return render(request, 'base/contact.html')
+
+
+
+
 
 def about(request):
     return render(request, 'base/about.html')
 
 def faqs(request):
     return render(request, 'base/faqs.html')
+
+def Terms(request):
+    return render(request, 'base/t&c.html')
 
 #sevices
 def permits(request):

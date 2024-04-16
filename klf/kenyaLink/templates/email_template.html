@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form Submission</title>
+</head>
+<body>
+    <h1>Contact Form Submission</h1>
+    <p>Dear KenyaLink,</p>
+    
+    <p>You have received a new email from {{ first_name }} {{ last_name }}. Here are the details:</p>
+
+    <ul>
+        <li><strong>Subject:</strong> {{ subject }}</li>
+        <li><strong>Name:</strong> {{ first_name }} {{ last_name }}</li>
+        <li><strong>Email:</strong> {{ email }}</li>
+        <li><strong>Message:</strong> {{ message }}</li>
+        
+        <li><strong>Sent At:</strong> {{ sent_at }}</li>
+    </ul>
+
+    <p>Please take necessary action on this submission.</p>
+
+    <p>Best regards,<br>
+    Your Website Team</p>
+</body>
+</html>
