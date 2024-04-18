@@ -20,7 +20,7 @@ SECRET_KEY = 'django-insecure-v173xwt@d8f*vphq%a+h3ziea*wc3t#-+4j4$kjvqd8*1-v!!7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ 'kenyalink-facilitators.com']
+ALLOWED_HOSTS = [' *' ]
 
 
 # Application definition
