@@ -1,0 +1,1 @@
+web : gunicorn klf.wsgi --log file -

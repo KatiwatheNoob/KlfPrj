@@ -7,8 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 import environ
 
-env = environ.Env()
-environ.Env.read_env()
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -20,7 +19,7 @@ SECRET_KEY = 'django-insecure-v173xwt@d8f*vphq%a+h3ziea*wc3t#-+4j4$kjvqd8*1-v!!7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [' *' ]
+ALLOWED_HOSTS = [' * ']
 
 
 # Application definition
